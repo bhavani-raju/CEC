@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Student Signup</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        width: 360px;
+        background: white;
+        padding: 28px;
+        border-radius: 16px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 22px;
+        color: #1f2937;
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .required {
+        color: red;
+      }
+
+      .input-box {
+        position: relative;
+      }
+
+      input {
+        width: 100%;
+        height: 42px;
+        padding: 0 12px 0 40px;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+        background: #f9fafb;
+        font-size: 14px;
+      }
+
+      input:focus {
+        border-color: #3a7bd5;
+        background: white;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(58, 123, 213, 0.15);
+      }
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        left: 12px;
+        transform: translateY(-50%);
+        color: gray;
+      }
+
+      .error {
+        font-size: 12px;
+        color: red;
+        margin-top: 4px;
+      }
+
+      /* Buttons */
+      .btn-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      button {
+        flex: 1;
+        height: 44px;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+
+      .submit-btn {
+        background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+        color: white;
+      }
+
+      .submit-btn:hover {
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+      }
+
+      .clear-btn {
+        background: #f3f4f6;
+        color: #333;
+      }
+
+      .clear-btn:hover {
+        background: #e5e7eb;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Student Signup</h2>
+
+      <form method="POST" onsubmit="return validateForm();">
+        <!-- Name -->
+        <div class="form-group">
+          <label>Name <span class="required">*</span> :</label>
+          <div class="input-box">
+            <i class="fa fa-user icon"></i>
+            <input type="text" id="name" name="name" placeholder="Enter Name" />
+          </div>
+          <div id="nameError" class="error"></div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label>Email <span class="required">*</span> :</label>
+          <div class="input-box">
+            <i class="fa fa-envelope icon"></i>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter Email"
+            />
+          </div>
+          <div id="emailError" class="error"></div>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label>Phone <span class="required">*</span> :</label>
+          <div class="input-box">
+            <i class="fa fa-phone icon"></i>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              placeholder="Enter Phone Number"
+            />
+          </div>
+          <div id="phoneError" class="error"></div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label>Password <span class="required">*</span> :</label>
+          <div class="input-box">
+            <i class="fa fa-lock icon"></i>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter Password"
+            />
+          </div>
+          <div id="passwordError" class="error"></div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-group">
+          <button type="submit" class="submit-btn">Signup</button>
+          <button type="button" class="clear-btn" onclick="clearForm()">
+            Clear
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function validateForm() {
+        let valid = true;
+
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let phone = document.getElementById("phone").value.trim();
+        let password = document.getElementById("password").value.trim();
+
+        document.getElementById("nameError").innerText = "";
+        document.getElementById("emailError").innerText = "";
+        document.getElementById("phoneError").innerText = "";
+        document.getElementById("passwordError").innerText = "";
+
+        if (name === "") {
+          document.getElementById("nameError").innerText = "Name is required";
+          valid = false;
+        }
+
+        if (!email.includes("@")) {
+          document.getElementById("emailError").innerText = "Enter valid email";
+          valid = false;
+        }
+
+        if (phone.length !== 10 || isNaN(phone)) {
+          document.getElementById("phoneError").innerText =
+            "Enter valid 10-digit phone";
+          valid = false;
+        }
+
+        if (password.length < 6) {
+          document.getElementById("passwordError").innerText =
+            "Minimum 6 characters required";
+          valid = false;
+        }
+
+        return valid;
+      }
+
+      function clearForm() {
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("phone").value = "";
+        document.getElementById("password").value = "";
+
+        document.getElementById("nameError").innerText = "";
+        document.getElementById("emailError").innerText = "";
+        document.getElementById("phoneError").innerText = "";
+        document.getElementById("passwordError").innerText = "";
+      }
+    </script>
+  </body>
+</html>

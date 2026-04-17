@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial;
+        background: #f5f7fa;
+      }
+
+      .navbar {
+        background: #2c3e50;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+      }
+
+      .logout-btn {
+        background: #e74c3c;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+      }
+
+      .logout-btn:hover {
+        background: #c0392b;
+      }
+
+      .container {
+        padding: 40px;
+        text-align: center;
+      }
+      .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 14px;
+      }
+
+      .card {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        width: 350px;
+        margin: auto;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <h2>Dashboard</h2>
+      <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+    <footer class="footer">© 2026 Your Company. All rights reserved.</footer>
+
+    <div class="container">
+      <div class="card">
+        <h3>Welcome {{ user.name }}</h3>
+        <p><b>Email:</b> {{ user.email }}</p>
+        <p><b>Phone:</b> {{ user.phone }}</p>
+      </div>
+    </div>
+  </body>
+</html>
